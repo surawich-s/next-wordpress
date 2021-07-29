@@ -5,17 +5,28 @@ import { getAuthor, getFeaturedImage } from "../../lib/utils";
 import { POSTS_API_URL } from "../../lib/constants";
 import Head from "next/head";
 import styles from "../../styles/Post.module.css";
+import HeroPost from "../../components/HeroPost";
 
-export default function Post({ title, featuredImg, author, content, date }) {
+export default function Post({
+  title,
+  featuredImg,
+  author,
+  content,
+  date,
+  post,
+}) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="mb-5 w-full">
+        <HeroPost post={post} />
+      </div>
 
       <main className="flex flex-col items-center flex-1 mx-5 md:px-20 py-10 max-w-5xl m-auto">
-        <h1 className="text-2xl md:text-6xl font-bold mt-5 mb-5 text-center">
+        {/* <h1 className="text-2xl md:text-6xl font-bold mt-5 mb-5 text-center">
           {title}
         </h1>
         <div>
@@ -24,7 +35,7 @@ export default function Post({ title, featuredImg, author, content, date }) {
         <p className="text-sm mt-5">Written by {author}</p>
         <p className="text-sm font-semibold mb-5">
           Published on {new Date(date).toDateString()}
-        </p>
+        </p> */}
         <div className={styles.post}>{parse(content)}</div>
       </main>
       <Footer />
@@ -61,6 +72,7 @@ export async function getStaticProps({ params }) {
       featuredImg,
       author,
       date: post.date,
+      post,
     },
   };
 }

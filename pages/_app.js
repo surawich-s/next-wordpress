@@ -16,7 +16,15 @@ function MyApp({ Component, pageProps }) {
     return () => (mounted = false);
   }, []);
 
-  return <Component posts={posts} {...pageProps} />;
+  return (
+    <>
+      {" "}
+      <h1 className="text-6xl font-bold mt-5 mb-5 text-center">
+        Wayne Magazine
+      </h1>
+      <Component posts={posts} {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;

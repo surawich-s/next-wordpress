@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Nav from "../components/Nav";
+import HeroPost from "../components/HeroPost";
 import Post from "../components/Post";
 import Footer from "../components/Footer";
 
@@ -10,10 +10,9 @@ export default function Home({ posts }) {
         <title>TonyTony's Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1 className="text-6xl font-bold mt-5 mb-5">Wayne Magazine</h1>
       {posts[0] && (
         <div className="mb-5 w-full">
-          <Nav navPost={posts[0]} />
+          <HeroPost post={posts[0]} />
         </div>
       )}
 
