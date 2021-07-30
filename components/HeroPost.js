@@ -27,7 +27,7 @@ export default function HeroPost({ post }) {
     };
   }, []);
   return (
-    <header>
+    <div>
       <div className="relative flex justify-center">
         <img
           className="w-full brightness-50 max-h-screen"
@@ -44,6 +44,6 @@ export default function HeroPost({ post }) {
           <p className="text-lg md:text-xl mt-4">{postImgAndAuthor.author}</p>
         </div>
       </div>
-    </header>
+    </div>
   );
 }
