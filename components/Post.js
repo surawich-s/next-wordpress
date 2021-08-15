@@ -13,7 +13,6 @@ export default function Post({ post }) {
     let mounted = true;
 
     if (mounted) {
-      console.log(post);
       const author = getAuthor(post.author);
       const featuredImg = getFeaturedImage(post.featured_media);
       //   resolve the promises in getAuthor and getFeaturedImg async functions using Promise.all
@@ -31,28 +30,28 @@ export default function Post({ post }) {
   }, []);
 
   return (
-    <div className="mb-5">
+    <div className="mb-5 rounded-lg bg-white shadow-md">
       <Link href={`/post/${post.id}`}>
-        <a className="text-4xl font-bold">
+        <a>
           <img
-            className="excerpt-img mb-2 max-h-72"
+            className="excerpt-img mb-2 max-h-48 rounded-t-lg"
             src={
               postImgAndAuthor
                 ? postImgAndAuthor.featImgUrl
                 : "/aeeiee-logo.png"
             }
           />
-          {post.title.rendered}
+          <div className="m-4">
+            <div className="text-2xl font-bold">{post.title.rendered}</div>
+            <div className="mt-4 text-lg max-w-lg">
+              {parse(post.excerpt.rendered)}
+            </div>
+            <div className="mt-4 text-gray-700 text-lg">
+              {postImgAndAuthor.author}
+            </div>
+          </div>
         </a>
       </Link>
-      <h4>{new Date(post.date).toDateString()}</h4>
-      <div className="mt-2 relative">
-        <div className="mb-2 max-w-lg">{parse(post.excerpt.rendered)}</div>
-
-        <Link href={`/post/${post.id}`}>
-          <a className=" text-blue-800 bottom-0">Continue reading</a>
-        </Link>
-      </div>
     </div>
   );
 }
