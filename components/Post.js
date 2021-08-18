@@ -34,7 +34,7 @@ export default function Post({ post }) {
       <Link href={`/post/${post.id}`}>
         <a>
           <img
-            className="excerpt-img mb-2 max-h-48 rounded-t-lg"
+            className="w-full mb-2 max-h-60 rounded-t-lg object-fit"
             src={
               postImgAndAuthor
                 ? postImgAndAuthor.featImgUrl

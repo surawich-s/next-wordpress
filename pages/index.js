@@ -14,15 +14,16 @@ export default function Home({ posts, heroPost, author, featuredImg }) {
         <title>TonyTony's Blog</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <div className="mb-5 w-full">
-        <HeroPost post={heroPost} author={author} featuredImg={featuredImg} />
-      </div>
+      {heroPost && author && featuredImg && (
+        <div className="mb-5 w-full">
+          <HeroPost post={heroPost} author={author} featuredImg={featuredImg} />
+        </div>
+      )}
 
       <main className="flex flex-col items-center flex-1 sm:px-20 py-10">
         {posts && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:gap-5">
-            {posts.map((post, id) => {
+            {posts.map((post) => {
               return <Post post={post} />;
             })}
           </div>
@@ -33,8 +34,11 @@ export default function Home({ posts, heroPost, author, featuredImg }) {
 }
 
 export async function getStaticProps(context) {
-  const posts = await getAllPostsFromServer();
-  const heroPost = await posts.find((post) => post.categories == 2);
+  let posts = await getAllPostsFromServer();
+  const heroPost = await posts.find((post) =>
+    post.categories.some((category) => category == 2)
+  );
+  posts = posts.filter((post) => post.categories != 2);
   const author = await getAuthor(heroPost.author);
   const featuredImg = await getFeaturedImage(heroPost.featured_media);
   return {

@@ -29,12 +29,10 @@ export default function Nav() {
           )}
         </div>
       </div>
-      <div className="flex-1">
+      <div className="flex-1 text-center">
         <button>
           <a href="/">
-            <h1 className="text-5xl font-bold mt-5 mb-5 text-center">
-              Ton Surawich
-            </h1>
+            <h1 className="text-5xl font-bold mt-5 mb-5">Ton Surawich</h1>
           </a>
         </button>
       </div>
