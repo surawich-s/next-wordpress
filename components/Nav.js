@@ -3,7 +3,7 @@ import { useState } from "react";
 export default function Nav() {
   const [open, setOpen] = useState(false);
   return (
-    <div className="flex flex-col md:flex-row items-center">
+    <div className="flex flex-col md:flex-row items-center shadow-lg">
       <div className="flex-1 justify-self-start hidden lg:block">
         <div className="flex flex-row gap-x-2 ml-auto justify-start pl-8">
           <svg
