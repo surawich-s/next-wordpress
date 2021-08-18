@@ -1,31 +1,46 @@
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/router";
 export default function Nav() {
   const [open, setOpen] = useState(false);
+  const [term, setTerm] = useState("");
+  const router = useRouter();
+
+  const searchSubmit = (e) => {
+    e.preventDefault();
+    router.push({ pathname: "/search", query: { q: term } });
+  };
   return (
     <div className="flex flex-col md:flex-row items-center shadow-lg">
       <div className="flex-1 justify-self-start hidden lg:block">
         <div className="flex flex-row gap-x-2 ml-auto justify-start pl-8">
-          <svg
-            onClick={() => setOpen((prevState) => !prevState)}
-            class="w-8 h-8"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            ></path>
-          </svg>
-          {open && (
-            <input
-              className="outline-none text-2xl text-left"
-              placeholder="Search"
-            ></input>
+          {router.pathname != "/search" && (
+            <svg
+              onClick={() => setOpen((prevState) => !prevState)}
+              class="w-8 h-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+          )}
+          {open && router.pathname != "/search" && (
+            <form onSubmit={searchSubmit}>
+              <input
+                className="outline-none text-2xl text-left"
+                placeholder="Search"
+                type="text"
+                value={term}
+                onChange={(e) => setTerm(e.target.value)}
+              ></input>
+            </form>
           )}
         </div>
       </div>
