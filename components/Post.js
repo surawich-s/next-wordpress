@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getAuthor, getFeaturedImage } from "../lib/utils";
 import parse from "html-react-parser";
@@ -22,6 +23,7 @@ export default function Post({ post }) {
           featImgUrl: res[1],
         });
       });
+      console.log(featuredImg);
     }
 
     return () => {
@@ -33,14 +35,18 @@ export default function Post({ post }) {
     <div className="mb-5 rounded-lg bg-white shadow-md">
       <Link href={`/post/${post.id}`}>
         <a>
-          <img
-            className="w-full mb-2 max-h-60 rounded-t-lg object-fit"
-            src={
-              postImgAndAuthor
-                ? postImgAndAuthor.featImgUrl
-                : "/aeeiee-logo.png"
-            }
-          />
+          <div className=" relative">
+            {postImgAndAuthor.featImgUrl && (
+              <Image
+                src={postImgAndAuthor.featImgUrl}
+                className="rounded-t-lg w-full max-h-60 hover:scale-150 duration-200"
+                width={300}
+                height={150}
+                layout="responsive"
+              />
+            )}
+          </div>
+
           <div className="m-4">
             <div className="text-2xl font-bold">{post.title.rendered}</div>
             <div className="mt-4 text-lg max-w-lg">

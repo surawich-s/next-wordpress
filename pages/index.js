@@ -34,13 +34,15 @@ export default function Home({ posts, heroPost, author, featuredImg }) {
 }
 
 export async function getStaticProps(context) {
-  let posts = await getAllPostsFromServer();
-  const heroPost = await posts.find((post) =>
-    post.categories.some((category) => category == 2)
-  );
-  posts = posts.filter((post) => post.categories != 2);
+  const posts = await getAllPostsFromServer();
+  // const heroPost = await posts.find((post) =>
+  //   post.categories.some((category) => category == 2)
+  // );
+  const heroPost = posts[0];
+  // posts = posts.filter((post) => post.categories != 2);
   const author = await getAuthor(heroPost.author);
   const featuredImg = await getFeaturedImage(heroPost.featured_media);
+  console.log(featuredImg);
   return {
     props: { posts, heroPost, author, featuredImg },
   };

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import parse from "html-react-parser";
 
 export default function HeroPost({ post, featuredImg, author }) {
@@ -6,11 +7,15 @@ export default function HeroPost({ post, featuredImg, author }) {
     <Link href={`/post/${post.id}`}>
       <a>
         <div className="relative flex justify-center">
-          <img
-            className="w-full brightness-50 max-h-screen"
-            src={featuredImg}
-            alt="no picture"
-          />
+          <div className="w-full brightness-50 min-h-screen relative">
+            <Image
+              src={featuredImg}
+              alt="no picture shown here"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
+
           <div className="text-gray-100 uppercase absolute m-0 top-1/4 text-center w-1/2">
             <h1 className="text-xl md:text-2xl lg:text-5xl">
               {post.title.rendered}
